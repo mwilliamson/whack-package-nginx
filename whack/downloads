@@ -1,5 +1,7 @@
 #!/bin/sh
 
+: ${VERSION?"VERSION was not set"}
+
 echo http://nginx.org/download/nginx-${VERSION}.tar.gz
 echo ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.31.tar.gz
 echo http://www.zlib.net/zlib-1.2.7.tar.gz
