@@ -2,15 +2,17 @@
 
 set -e
 
+. $(dirname $0)/set-versions
+
 TARGET_DIR=$1
 
-NGINX_DIR=`ls nginx-*.tar.gz | sed 's/^\(nginx-.*\)\.tar\.gz$/\1/g'`
-PCRE_DIR=`ls pcre-*.tar.gz | sed 's/^\(pcre-.*\)\.tar\.gz$/\1/g'`
-ZLIB_DIR=`ls zlib-*.tar.gz | sed 's/^\(zlib-.*\)\.tar\.gz$/\1/g'`
+NGINX_DIR=nginx-${NGINX_VERSION}
+PCRE_DIR=pcre-${PCRE_VERSION}
+ZLIB_DIR=zlib-${ZLIB_VERSION}
 
-tar xzf pcre-*.tar.gz
-tar xzf nginx-*.tar.gz
-tar xzf zlib-*.tar.gz
+tar xzf nginx-${NGINX_VERSION}.tar.gz
+tar xzf pcre-${PCRE_VERSION}.tar.gz
+tar xzf zlib-${ZLIB_VERSION}.tar.gz
 
 mkdir -p ${TARGET_DIR}/.sbin
 
