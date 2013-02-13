@@ -1,4 +1,5 @@
 import os
+import shutil
 
 from nose.tools import istest
 import peachtree
@@ -37,13 +38,13 @@ def _start_virtual_machine():
 
 def _install_whack(machine):
     whack_rooter_path = "/usr/local/bin/whack-run-with-whack-root"
-    with open(whack_rooter_path, "rb") as whack_rooter_file:
-        whack_rooter_contents = whack_rooter_file.read()
         
     root_shell = machine.root_shell()
     
     with root_shell.open(whack_rooter_path, "wb") as remote_whack_rooter_file:
-        remote_whack_rooter_file.write(whack_rooter_contents)
+        with open(whack_rooter_path, "rb") as whack_rooter_file:
+            shutil.copyfileobj(whack_rooter_file, remote_whack_rooter_file)
+    
     root_shell.run(["chmod", "+xs", whack_rooter_path])
         
     root_shell.run(["pip", "install", "whack"])
