@@ -11,21 +11,28 @@ def default_installation_serves_default_page():
         _install_whack(machine)
         
         working_dir = _upload_source(machine)
-        # TODO: change to ordinary user and change port in nginx.conf
-        shell = machine.root_shell()
+        shell = machine.shell()
         install_dir = shell.run(["sh", "-c", "echo ~/install-dir"]).output.strip()
         shell.run(
             ["whack", "install", working_dir, install_dir],
         )
+        conf_path = os.path.join(install_dir, "conf/nginx.conf")
+        shell.run([
+            "sed", "-ie",
+            r"s/listen\s\+80\s*;/listen {0};/g".format(_nginx_port),
+            conf_path,
+        ])
         shell.run([os.path.join(install_dir, "sbin/nginx")])
-        response = requests.get("http://localhost:{0}".format(machine.public_port(80)))
-        # TODO: make a slightly stronger assertion
-        assert "nginx" in response.text
+        response = requests.get("http://localhost:{0}".format(machine.public_port(_nginx_port)))
+        assert "Welcome to nginx!" in response.text
         
         
 
 def _start_virtual_machine():
-    return peachtree.qemu_provider().start("ubuntu-precise-amd64", public_ports=[80])
+    return peachtree.qemu_provider().start(
+        "ubuntu-precise-amd64-whack",
+        public_ports=[_nginx_port]
+    )
 
 
 def _install_whack(machine):
@@ -39,9 +46,6 @@ def _install_whack(machine):
         remote_whack_rooter_file.write(whack_rooter_contents)
     root_shell.run(["chmod", "+xs", whack_rooter_path])
         
-    root_shell.run(["apt-get", "update"])
-    root_shell.run(["apt-get", "install", "python-setuptools", "git", "build-essential", "--yes"])
-    root_shell.run(["easy_install", "pip"])
     root_shell.run(["pip", "install", "whack"])
 
 
@@ -57,3 +61,4 @@ def _upload_source(machine):
     return working_dir
     
 
+_nginx_port = 8080
