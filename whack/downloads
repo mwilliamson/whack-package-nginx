@@ -1,7 +1,5 @@
 #!/bin/sh
 
-. $(dirname $0)/set-versions
-
 echo http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 echo ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${PCRE_VERSION}.tar.gz
 echo http://www.zlib.net/zlib-${ZLIB_VERSION}.tar.gz

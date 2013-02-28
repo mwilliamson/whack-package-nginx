@@ -2,8 +2,6 @@
 
 set -e
 
-. $(dirname $0)/set-versions
-
 TARGET_DIR=$1
 
 NGINX_DIR=nginx-${NGINX_VERSION}
