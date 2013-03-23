@@ -6,10 +6,7 @@ package_tarball = whack-package-nginx.tar.gz
 build: $(package_tarball)
 
 $(package_tarball): whack/*
-	rm -rf _package
-	mkdir -p _package
-	$(virtualenv_dir)/bin/whack build . `pwd`/_package --no-cache
-	tar czf $(package_tarball) _package
+	$(virtualenv_dir)/bin/whack get-package-tarball . .
 
 test: bootstrap
 	sh -c '. $(virtualenv_dir)/bin/activate; nosetests -m'\''^$$'\'' `find tests -name '\''*.py'\''`'
