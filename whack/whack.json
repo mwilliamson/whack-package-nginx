@@ -7,10 +7,5 @@
         "zlib_version": "1.2.7"
     },
     "test": "make test",
-    "sourcePaths": [
-        "whack",
-        "tests",
-        "requirements.txt",
-        "makefile"
-    ]
+    "sourcePaths": ["whack"]
 }
