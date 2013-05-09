@@ -27,4 +27,4 @@ def default_installation_serves_default_page():
     ])
     shell.run([os.path.join(install_dir, "sbin/nginx")])
     response = requests.get("http://localhost:{0}".format(nginx_port))
-    assert "Welcome to nginx!" in response.text
+    assert "Welcome to nginx!" in response.text, "Response text was: \n{0}".format(response.text)
