@@ -17,7 +17,6 @@ mkdir -p ${TARGET_DIR}/.sbin
 cd ${NGINX_DIR}
 ./configure \
     --prefix=${TARGET_DIR} \
-    --sbin-path=${TARGET_DIR}/.sbin \
     --with-pcre=../${PCRE_DIR} \
     --with-zlib=../${ZLIB_DIR} \
     --with-ipv6
