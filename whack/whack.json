@@ -4,7 +4,7 @@
     "defaultParams": {
         "nginx_version": "1.4.2",
         "pcre_version": "8.40",
-        "zlib_version": "1.2.8"
+        "zlib_version": "1.2.11"
     },
     "test": "make test",
     "sourcePaths": ["whack"]
