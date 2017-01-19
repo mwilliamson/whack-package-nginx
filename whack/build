@@ -12,8 +12,6 @@ tar xzf nginx-${NGINX_VERSION}.tar.gz
 tar xzf pcre-${PCRE_VERSION}.tar.gz
 tar xzf zlib-${ZLIB_VERSION}.tar.gz
 
-mkdir -p ${TARGET_DIR}/.sbin
-
 cd ${NGINX_DIR}
 ./configure \
     --prefix=${TARGET_DIR} \
