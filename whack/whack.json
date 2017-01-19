@@ -3,7 +3,7 @@
     "paramSlug": "{nginx_version}",
     "defaultParams": {
         "nginx_version": "1.4.2",
-        "pcre_version": "8.33",
+        "pcre_version": "8.40",
         "zlib_version": "1.2.8"
     },
     "test": "make test",
