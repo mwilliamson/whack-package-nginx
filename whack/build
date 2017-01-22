@@ -12,11 +12,13 @@ tar xzf nginx-${NGINX_VERSION}.tar.gz
 tar xzf pcre-${PCRE_VERSION}.tar.gz
 tar xzf zlib-${ZLIB_VERSION}.tar.gz
 
+patch -p2 -d"${NGINX_DIR}" < patches/guess-prefix
+
 cd ${NGINX_DIR}
 ./configure \
-    --prefix=${TARGET_DIR} \
+    --prefix= \
     --with-pcre=../${PCRE_DIR} \
     --with-zlib=../${ZLIB_DIR} \
     --with-ipv6
 make
-make install
+DESTDIR="${TARGET_DIR}" make install
